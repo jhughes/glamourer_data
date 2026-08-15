@@ -1,0 +1,11 @@
+.gradle/
+build/
+out/
+
+# Wiki scrapes are intermediates; CI regenerates them each run.
+osrs_wiki_items.json
+osrs_wiki_pets.json
+
+.idea/
+*.iml
+__pycache__/

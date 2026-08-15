@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    maven {
+        url = 'https://repo.runelite.net'
+        content {
+            includeGroupByRegex("net\\.runelite.*")
+        }
+    }
+    mavenCentral()
+}
+
+dependencies {
+    // Always build against the newest published cache library, so a Jagex cache format change is
+    // fixed by RuneLite publishing a new artifact rather than by patching anything here.
+    implementation 'net.runelite:cache:latest.release'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
+}
+
+application {
+    mainClass = 'io.huze.glamourer.data.GenerateSheets'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    // Matches the bytecode level of the cache artifact; the generators need nothing newer.
+    options.release.set(11)
+}

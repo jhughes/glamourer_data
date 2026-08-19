@@ -1,6 +1,6 @@
 # This file is generated; do not edit manually.
-# cache: 07816e6 Cache version 2026-08-12-rev240
-# wiki pets fetched: 2026-08-18T04:03:23Z
+# cache: cb77808 Cache version 2026-08-19-rev240
+# wiki pets fetched: 2026-08-19T11:02:00Z
 item_id,npc_ids,npc_models
 # Cat (Grey and black)
 1561,1619|6662,
@@ -415,4 +415,4 @@ item_id,npc_ids,npc_models
 # Mr McGroot
 34040,16316|16333,61849
 # Aggy
-34042,16317|16334,61845
+34042,16317|16334,61867

@@ -1,6 +1,6 @@
 # This file is generated; do not edit manually.
 # cache: cb77808 Cache version 2026-08-19-rev240
-# wiki pets fetched: 2026-08-20T04:03:55Z
+# wiki pets fetched: 2026-08-21T04:06:38Z
 item_id,npc_ids,npc_models
 # Cat (Grey and black)
 1561,1619|6662,
@@ -392,7 +392,7 @@ item_id,npc_ids,npc_models
 31285,14931|15059,59403
 # Gull (pet) (Gulliver)
 31287,14932|15060,59398
-# Mayor of catherby
+# Mayor of Catherby
 31331,15050,
 # Beef
 33124,15631|15633,

@@ -1,6 +1,6 @@
 # This file is generated; do not edit manually.
 # cache: d11b59a Cache version 2026-08-26-rev240
-# wiki items fetched: 2026-08-26T16:05:25Z
+# wiki items fetched: 2026-08-27T14:20:31Z
 id,release_date,removal_date,quest,category,male_model0,male_model1,male_model2,female_model0,female_model1,female_model2
 0,1053993600,2147483647,true,0,-1,-1,-1,-1,-1,-1
 1,1053993600,2147483647,true,0,-1,-1,-1,-1,-1,-1
@@ -16141,6 +16141,10 @@ id,release_date,removal_date,quest,category,male_model0,male_model1,male_model2,
 34061,1786492800,2147483647,false,3,-1,-1,-1,-1,-1,-1
 34063,1786492800,2147483647,false,2,-1,-1,-1,-1,-1,-1
 34065,1787097600,2147483647,false,720,-1,-1,-1,-1,-1,-1
+34068,1787702400,2147483647,false,0,-1,-1,-1,-1,-1,-1
+34070,1787702400,2147483647,false,0,-1,-1,-1,-1,-1,-1
+34072,1787702400,2147483647,false,0,-1,-1,-1,-1,-1,-1
+34074,1787702400,2147483647,false,0,-1,-1,-1,-1,-1,-1
 34077,1787702400,2147483647,false,2516,-1,-1,-1,-1,-1,-1
 34079,1787702400,2147483647,false,2516,-1,-1,-1,-1,-1,-1
 34081,1787702400,2147483647,false,2516,-1,-1,-1,-1,-1,-1

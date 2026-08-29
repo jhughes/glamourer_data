@@ -1,6 +1,6 @@
 # This file is generated; do not edit manually.
 # cache: d11b59a Cache version 2026-08-26-rev240
-# wiki pets fetched: 2026-08-27T14:20:58Z
+# wiki pets fetched: 2026-08-29T10:13:55Z
 item_id,npc_ids,npc_models
 # Cat (Grey and black)
 1561,1619|6662,
@@ -397,7 +397,7 @@ item_id,npc_ids,npc_models
 # Beef
 33124,15631|15633,
 # Archibald (Archibald)
-33151,15580|15581|15586|15587,
+33151,15586|15587,
 # Archibald (Grid)
 33153,15588|15590,
 # Archibald (Bunny)

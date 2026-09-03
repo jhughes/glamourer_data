@@ -53,6 +53,7 @@ jobs:
           floor item_sheet 15000
           floor npc_sheet 6000
           floor stack_variant_sheet 1300
+          floor item_dedupe_sheet 150
           floor pet_sheet 190
 
       # Provenance headers change every run; they alone are not worth a commit.

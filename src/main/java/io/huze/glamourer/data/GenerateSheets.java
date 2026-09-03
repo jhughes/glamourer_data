@@ -32,9 +32,10 @@ public class GenerateSheets
 			npcs.load();
 			ModelProvider models = new StoreModelProvider(store);
 
-			GenerateItemSheet itemSheet = new GenerateItemSheet(items.getItems(), models, csv);
-			itemSheet.export(new File(outDir, "item_sheet.csv"), wikiItems);
+			GenerateItemSheet itemSheet = new GenerateItemSheet(items.getItems(), models, csv, wikiItems);
+			itemSheet.exportItems(new File(outDir, "item_sheet.csv"));
 			itemSheet.exportStackVariants(new File(outDir, "stack_variant_sheet.csv"));
+			itemSheet.exportDedupeGroups(new File(outDir, "item_dedupe_sheet.csv"));
 
 			new GeneratePetSheet(items.getItems(), npcs.getNpcs(), models, csv)
 				.export(new File(outDir, "pet_sheet.csv"), wikiPets);

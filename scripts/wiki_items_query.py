@@ -17,7 +17,7 @@ def fetch_all_wiki_items():
         query = (
             f"bucket('infobox_item')"
             f".orderBy('item_name')"
-            f".select('item_name','item_id','release_date','removal_date','quest')"
+            f".select('page_name','item_name','item_id','release_date','removal_date','quest')"
             f".limit({limit})"
             f".offset({offset})"
             f".run()"

@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -20,6 +21,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.cache.definitions.ItemDefinition;
 import net.runelite.cache.definitions.ModelDefinition;
@@ -29,26 +32,61 @@ import net.runelite.cache.definitions.providers.ModelProvider;
 public class GenerateItemSheet
 {
 	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
+	private static final Pattern TRAILING_PARENS = Pattern.compile("(\\s*\\([^)]*\\))+$");
+	private static final Pattern TRAILING_INTEGER_PAREN = Pattern.compile("\\s*\\(\\d+\\)$");
+	private static final Pattern TRAILING_NUMBER = Pattern.compile("\\s\\d+$");
+	private static final Map<Integer, Integer> LOOKS_LIKE = Map.ofEntries(
+		// Regular Ahrim's robetop (contains an unused color)
+		Map.entry(4712, 4868),
+		// Broken Echo Ahrim's staff
+		Map.entry(30574, 30570),
+		// Broken Ahrim's set
+		Map.entry(4860, 4856), Map.entry(4866, 4862), Map.entry(4872, 4868), Map.entry(4878, 4874),
+		// Broken Dharok's set
+		Map.entry(4884, 4880), Map.entry(4890, 4886), Map.entry(4896, 4892), Map.entry(4902, 4898),
+		// Broken Guthan's set
+		Map.entry(4908, 4904), Map.entry(4914, 4910), Map.entry(4920, 4916), Map.entry(4926, 4922),
+		// Broken Karil's set
+		Map.entry(4932, 4928), Map.entry(4938, 4934), Map.entry(4944, 4940), Map.entry(4950, 4946),
+		// Broken Torag's set
+		Map.entry(4956, 4952), Map.entry(4962, 4958), Map.entry(4968, 4964), Map.entry(4974, 4970),
+		// Broken Verac's set
+		Map.entry(4980, 4976), Map.entry(4986, 4982), Map.entry(4992, 4988), Map.entry(4998, 4994)
+	);
+
+	private static final Comparator<ItemDefinition> PRIMARY_FIRST =
+		Comparator.<ItemDefinition>comparingInt(idef -> idef.name.length())
+			.thenComparing(idef -> idef.name, Comparator.reverseOrder())
+			.thenComparingInt(idef -> idef.id);
 
 	private final Collection<ItemDefinition> itemDefs;
 	private final ModelProvider modelProvider;
 	private final Csv csv;
 	private final Map<Integer, ModelFaces> faceCache = new HashMap<>();
+	private final Map<Integer, ItemDefinition> itemsById = new HashMap<>();
+	private final String wikiProvenance;
+	private final Map<Integer, WikiFacts> wikiFacts;
 
-	public GenerateItemSheet(Collection<ItemDefinition> itemDefs, ModelProvider modelProvider, Csv csv)
+	public GenerateItemSheet(Collection<ItemDefinition> itemDefs, ModelProvider modelProvider, Csv csv, File wikiItemsJson) throws IOException
 	{
 		this.itemDefs = itemDefs;
+		for (ItemDefinition idef : itemDefs)
+		{
+			itemsById.put(idef.id, idef);
+		}
 		this.modelProvider = modelProvider;
 		this.csv = csv;
+		WikiItemsFile wiki = readWikiItems(wikiItemsJson);
+		this.wikiProvenance = "wiki items fetched: " + wiki.fetched_utc;
+		this.wikiFacts = wikiFacts(wiki.items);
 	}
 
-	public void export(File out, File wikiItemsJson) throws IOException
+	public void exportItems(File out) throws IOException
 	{
-		WikiItemsFile wiki = readWikiItems(wikiItemsJson);
-		List<ItemRow> rows = rows(wiki.items);
+		List<ItemRow> rows = rows();
 		rows.removeIf(row -> !row.isWorthSerializing());
 
-		try (PrintWriter writer = csv.open(out, "wiki items fetched: " + wiki.fetched_utc))
+		try (PrintWriter writer = csv.open(out, wikiProvenance))
 		{
 			writer.println(ItemRow.CSV_HEADER);
 			for (ItemRow row : rows)
@@ -57,6 +95,128 @@ public class GenerateItemSheet
 			}
 		}
 		log.info("Wrote to " + out.getAbsolutePath());
+	}
+
+	/// Groups of items the plugin should treat as one visual item but cannot derive from names + appearance alone:
+	/// - Numbered variants (Barrows Gear, fungicide spray) - Serum 207 / 208 makes general name matching fail
+	/// - Potion doses - Different models
+	/// - Fruit baskets - Different models
+	/// - Watering Can - Different models
+	public void exportDedupeGroups(File out) throws IOException
+	{
+		var pages = new HashMap<String, List<ItemDefinition>>();
+		for (var idef : itemDefs)
+		{
+			var page = wikiFacts.getOrDefault(idef.id, WikiFacts.NONE).pageName;
+			if (page != null && !filterItem(idef))
+			{
+				pages.computeIfAbsent(page, k -> new ArrayList<>()).add(idef);
+			}
+		}
+
+		var groups = new ArrayList<List<ItemDefinition>>();
+		var grouped = new HashSet<Integer>();
+		for (var page : pages.values())
+		{
+			var sets = numberedVariantSets(page);
+			sets.addAll(doseSets(page));
+			for (var set : sets)
+			{
+				set.sort(PRIMARY_FIRST);
+				for (ItemDefinition idef : set)
+				{
+					if (!grouped.add(idef.id))
+					{
+						throw new IllegalStateException(idef.id + " " + idef.name + " is in two dedupe groups");
+					}
+				}
+			}
+			groups.addAll(sets);
+		}
+		groups.sort(Comparator.comparingInt(group -> group.get(0).id));
+
+		try (var writer = csv.open(out, wikiProvenance))
+		{
+			writer.println("primary_id,deduped_ids");
+			for (var group : groups)
+			{
+				ItemDefinition primary = group.get(0);
+				writer.println("# " + primary.name);
+				writer.println(primary.id + "," + group.subList(1, group.size()).stream()
+					.map(idef -> String.valueOf(idef.id))
+					.collect(Collectors.joining("|")));
+			}
+		}
+		log.info("Wrote to {} ({} groups)", out.getAbsolutePath(), groups.size());
+	}
+
+	/// Same appearance, different stripped names, at least one ending in a number.
+	private List<List<ItemDefinition>> numberedVariantSets(List<ItemDefinition> page)
+	{
+		var byAppearance = new HashMap<String, List<ItemDefinition>>();
+		for (var idef : page)
+		{
+			var look = lookOf(idef);
+			byAppearance.computeIfAbsent(look.inventoryModel + ":" + colours(look), k -> new ArrayList<>()).add(idef);
+		}
+		var sets = new ArrayList<List<ItemDefinition>>();
+		for (var set : byAppearance.values())
+		{
+			var strippedNames = new HashSet<String>();
+			var hasTrailingNumber = false;
+			for (var idef : set)
+			{
+				var stripped = extractTrailingParens(idef.name);
+				strippedNames.add(stripped);
+				hasTrailingNumber |= TRAILING_NUMBER.matcher(stripped).find();
+			}
+			if (strippedNames.size() > 1 && hasTrailingNumber)
+			{
+				sets.add(set);
+			}
+		}
+		return sets;
+	}
+
+	/// Names differing only by a trailing parenthesised integer, same colours, differing models.
+	private List<List<ItemDefinition>> doseSets(List<ItemDefinition> page)
+	{
+		var byDoselessName = new HashMap<String, List<ItemDefinition>>();
+		for (ItemDefinition idef : page)
+		{
+			var dose = TRAILING_INTEGER_PAREN.matcher(idef.name.trim());
+			if (dose.find())
+			{
+				String doseless = dose.replaceAll("");
+				byDoselessName.computeIfAbsent(doseless + ":" + colours(lookOf(idef)), k -> new ArrayList<>()).add(idef);
+			}
+		}
+		var sets = new ArrayList<List<ItemDefinition>>();
+		for (var set : byDoselessName.values())
+		{
+			if (set.stream().anyMatch(idef -> idef.inventoryModel != set.get(0).inventoryModel))
+			{
+				sets.add(set);
+			}
+		}
+		return sets;
+	}
+
+	private ItemDefinition lookOf(ItemDefinition idef)
+	{
+		var lookalike = LOOKS_LIKE.get(idef.id);
+		return lookalike != null ? itemsById.get(lookalike) : idef;
+	}
+
+	private static String colours(ItemDefinition idef)
+	{
+		return Arrays.toString(idef.colorFind) + Arrays.toString(idef.colorReplace)
+			+ Arrays.toString(idef.textureFind) + Arrays.toString(idef.textureReplace);
+	}
+
+	private static String extractTrailingParens(String name)
+	{
+		return TRAILING_PARENS.matcher(name.trim()).replaceAll("").trim();
 	}
 
 	public void exportStackVariants(File out) throws IOException
@@ -89,10 +249,8 @@ public class GenerateItemSheet
 		log.info("Wrote to " + out.getAbsolutePath());
 	}
 
-	private List<ItemRow> rows(List<WikiItem> wikiItems)
+	private List<ItemRow> rows()
 	{
-		Map<Integer, WikiFacts> wiki = wikiFacts(wikiItems);
-
 		List<ItemRow> rows = new ArrayList<>();
 		for (ItemDefinition idef : itemDefs)
 		{
@@ -100,7 +258,7 @@ public class GenerateItemSheet
 			{
 				continue;
 			}
-			WikiFacts facts = wiki.getOrDefault(idef.id, WikiFacts.NONE);
+			WikiFacts facts = wikiFacts.getOrDefault(idef.id, WikiFacts.NONE);
 
 			// Seed with what the inventory model shows; a worn model earns a column only by adding
 			// a color or texture not yet seen.
@@ -223,17 +381,20 @@ public class GenerateItemSheet
 
 	private static class WikiFacts
 	{
-		static final WikiFacts NONE = new WikiFacts(0, Integer.MAX_VALUE, false);
+		static final WikiFacts NONE = new WikiFacts(0, Integer.MAX_VALUE, false, null);
 
 		final long releaseDate;
 		final long removalDate;
 		final boolean isQuestItem;
+		/// The wiki page the item is listed on, which groups its versions (doses, charges, degrade states).
+		final String pageName;
 
-		WikiFacts(long releaseDate, long removalDate, boolean isQuestItem)
+		WikiFacts(long releaseDate, long removalDate, boolean isQuestItem, String pageName)
 		{
 			this.releaseDate = releaseDate;
 			this.removalDate = removalDate;
 			this.isQuestItem = isQuestItem;
+			this.pageName = pageName;
 		}
 	}
 
@@ -260,7 +421,8 @@ public class GenerateItemSheet
 				facts.put(Integer.parseInt(idStr), new WikiFacts(
 					toUnix(item.release_date, 0),
 					toUnix(item.removal_date, Integer.MAX_VALUE),
-					!("no".equalsIgnoreCase(item.quest) || "none".equalsIgnoreCase(item.quest))));
+					!("no".equalsIgnoreCase(item.quest) || "none".equalsIgnoreCase(item.quest)),
+					item.page_name != null && !item.page_name.isBlank() ? item.page_name : null));
 			}
 		}
 		return facts;
@@ -275,6 +437,7 @@ public class GenerateItemSheet
 	private static class WikiItem
 	{
 		List<String> item_id;
+		String page_name;
 		String item_name;
 		String release_date;
 		String removal_date;

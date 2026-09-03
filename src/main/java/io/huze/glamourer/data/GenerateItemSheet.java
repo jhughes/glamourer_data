@@ -112,7 +112,8 @@ public class GenerateItemSheet
 				idef.id,
 				facts.releaseDate,
 				facts.removalDate,
-				facts.isQuestItem,
+				// Anything the player can equip may be useful after the quest, so is not treated as a quest item.
+				facts.isQuestItem && !equippable(idef),
 				idef.category,
 				modelIfNew(idef.maleModel0, seenColors, seenTextures),
 				modelIfNew(idef.maleModel1, seenColors, seenTextures),
@@ -195,6 +196,22 @@ public class GenerateItemSheet
 				}
 			}
 		}
+	}
+
+	private boolean equippable(ItemDefinition idef)
+	{
+		if (idef.interfaceOptions == null)
+		{
+			return false;
+		}
+		for (String option : idef.interfaceOptions)
+		{
+			if ("Wield".equalsIgnoreCase(option) || "Wear".equalsIgnoreCase(option))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean filterItem(ItemDefinition idef)

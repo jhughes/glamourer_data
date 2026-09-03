@@ -1,0 +1,368 @@
+# This file is generated; do not edit manually.
+# cache: local
+# wiki items fetched: 2026-09-03T05:15:08Z
+primary_id,deduped_ids
+# Strength potion(4)
+113,115|117|119
+# Attack potion(4)
+2428,121|123|125
+# Restore potion(4)
+2430,127|129|131
+# Defence potion(4)
+2432,133|135|137
+# Prayer potion(4)
+2434,139|141|143
+# Super attack(4)
+2436,145|147|149
+# Fishing potion(4)
+2438,151|153|155
+# Super strength(4)
+2440,157|159|161
+# Super defence(4)
+2442,163|165|167
+# Ranging potion(4)
+2444,169|171|173
+# Antipoison(4)
+2446,175|177|179
+# Superantipoison(4)
+2448,181|183|185
+# Zamorak brew(4)
+2450,189|191|193
+# Antifire potion(4)
+2452,2454|2456|2458
+# Energy potion(4)
+3008,3010|3012|3014
+# Super energy(4)
+3016,3018|3020|3022
+# Super restore(4)
+3024,3026|3028|3030
+# Agility potion(4)
+3032,3034|3036|3038
+# Magic potion(4)
+3040,3042|3044|3046
+# Serum 207 (4)
+3408,3410|3412|3414
+# Serum 208 (4)
+3416,3417|3418|3419
+# Olive oil(4)
+3422,3424|3426|3428
+# Sacred oil(4)
+3430,3432|3434|3436
+# Ahrim's hood
+4708,4860|4857|4858|4859|4856
+# Ahrim's staff
+4710,4866|4863|4864|4865|4862
+# Ahrim's robetop
+4712,4872|4869|4870|4871|4868
+# Ahrim's robeskirt
+4714,4878|4875|4876|4877|4874
+# Dharok's helm
+4716,4884|4881|4882|4883|4880
+# Dharok's greataxe
+4718,4890|4887|4888|4889|4886
+# Dharok's platebody
+4720,4896|4893|4894|4895|4892
+# Dharok's platelegs
+4722,4902|4899|4900|4901|4898
+# Guthan's helm
+4724,4908|4905|4906|4907|4904
+# Guthan's warspear
+4726,4914|4911|4912|4913|4910
+# Guthan's platebody
+4728,4920|4917|4918|4919|4916
+# Guthan's chainskirt
+4730,4926|4923|4924|4925|4922
+# Karil's coif
+4732,4932|4929|4930|4931|4928
+# Karil's crossbow
+4734,4938|4935|4936|4937|4934
+# Karil's leathertop
+4736,4944|4941|4942|4943|4940
+# Karil's leatherskirt
+4738,4950|4947|4948|4949|4946
+# Torag's helm
+4745,4956|4953|4954|4955|4952
+# Torag's hammers
+4747,4962|4959|4960|4961|4958
+# Torag's platebody
+4749,4968|4965|4966|4967|4964
+# Torag's platelegs
+4751,4974|4971|4972|4973|4970
+# Verac's helm
+4753,4980|4977|4978|4979|4976
+# Verac's flail
+4755,4986|4983|4984|4985|4982
+# Verac's brassard
+4757,4992|4989|4990|4991|4988
+# Verac's plateskirt
+4759,4998|4995|4996|4997|4994
+# Relicym's balm(4)
+4842,4844|4846|4848
+# Watering can(8)
+5340,5339|5338|5337|5336|5335|5334|5333
+# Apples(5)
+5386,5384|5382|5380|5378
+# Oranges(5)
+5396,5394|5392|5390|5388
+# Strawberries(5)
+5406,5404|5402|5400|5398
+# Bananas(5)
+5416,5414|5412|5410|5408
+# Antidote+(4)
+5943,5945|5947|5949
+# Antidote++(4)
+5952,5954|5956|5958
+# Tomatoes(5)
+5968,5966|5964|5962|5960
+# Compost potion(4)
+6470,6472|6474|6476
+# Saradomin brew(4)
+6685,6687|6689|6691
+# Fungicide spray 9
+7422,7423|7424|7425|7426|7427|7428|7429|7430|7431|7421
+# Guthix balance(4)
+7660,7662|7664|7666
+# Magic essence(4)
+9021,9022|9023|9024
+# Combat potion(4)
+9739,9741|9743|9745
+# Hunter potion(4)
+9998,10000|10002|10004
+# Healing vial(4)
+10542,10543|10544|10545
+# Mixture - step 1(4)
+10909,10911|10913|10915
+# Mixture - step 2(4)
+10917,10919|10921|10923
+# Sanfew serum(4)
+10925,10927|10929|10931
+# Attack mix(2)
+11429,11431
+# Antipoison mix(2)
+11433,11435
+# Relicym's mix(2)
+11437,11439
+# Strength mix(2)
+11443,11441
+# Combat mix(2)
+11445,11447
+# Restore mix(2)
+11449,11451
+# Energy mix(2)
+11453,11455
+# Defence mix(2)
+11457,11459
+# Agility mix(2)
+11461,11463
+# Prayer mix(2)
+11465,11467
+# Superattack mix(2)
+11469,11471
+# Anti-poison supermix(2)
+11473,11475
+# Fishing mix(2)
+11477,11479
+# Super energy mix(2)
+11481,11483
+# Super str. mix(2)
+11485,11487
+# Magic essence mix(2)
+11489,11491
+# Super restore mix(2)
+11493,11495
+# Super def. mix(2)
+11497,11499
+# Antidote+ mix(2)
+11501,11503
+# Antifire mix(2)
+11505,11507
+# Ranging mix(2)
+11509,11511
+# Magic mix(2)
+11513,11515
+# Hunting mix(2)
+11517,11519
+# Zamorak mix(2)
+11521,11523
+# Super ranging (4)
+11722,11723|11724|11725
+# Super magic potion (4)
+11726,11727|11728|11729
+# Overload (4)
+11730,11731|11732|11733
+# Absorption (4)
+11734,11735|11736|11737
+# Extended antifire(4)
+11951,11953|11955|11957
+# Extended antifire mix(2)
+11960,11962
+# Stamina potion(4)
+12625,12627|12629|12631
+# Stamina mix(2)
+12633,12635
+# Super combat potion(4)
+12695,12697|12699|12701
+# Anti-venom(4)
+12905,12907|12909|12911
+# Anti-venom+(4)
+12913,12915|12917|12919
+# Vial of tears (3)
+13350,13349|13348
+# Prayer potion(4)
+20393,20394|20395|20396
+# Super energy(4)
+20548,20549|20550|20551
+# Rejuvenation potion (4)
+20699,20700|20701|20702
+# Elder (-)(4)
+20916,20915|20914|20913
+# Elder potion (4)
+20920,20919|20918|20917
+# Elder (+)(4)
+20924,20923|20922|20921
+# Twisted (-)(4)
+20928,20927|20926|20925
+# Twisted potion (4)
+20932,20931|20930|20929
+# Twisted (+)(4)
+20936,20935|20934|20933
+# Kodai (-)(4)
+20940,20939|20938|20937
+# Kodai potion (4)
+20944,20943|20942|20941
+# Kodai (+)(4)
+20948,20947|20946|20945
+# Revitalisation (-)(4)
+20952,20951|20950|20949
+# Revitalisation potion (4)
+20956,20955|20954|20953
+# Revitalisation (+)(4)
+20960,20959|20958|20957
+# Prayer enhance (-)(4)
+20964,20963|20962|20961
+# Prayer enhance (4)
+20968,20967|20966|20965
+# Prayer enhance (+)(4)
+20972,20971|20970|20969
+# Xeric's aid (-)(4)
+20976,20975|20974|20973
+# Xeric's aid (4)
+20980,20979|20978|20977
+# Xeric's aid (+)(4)
+20984,20983|20982|20981
+# Super antifire potion(4)
+21978,21981|21984|21987
+# Super antifire mix(2)
+21994,21997
+# Extended super antifire(4)
+22209,22212|22215|22218
+# Extended super antifire mix(2)
+22221,22224
+# Battlemage potion(4)
+22449,22452|22455|22458
+# Bastion potion(4)
+22461,22464|22467|22470
+# Super combat potion(4)
+23543,23545|23547|23549
+# Ranging potion(4)
+23551,23553|23555|23557
+# Sanfew serum(4)
+23559,23561|23563|23565
+# Super restore(4)
+23567,23569|23571|23573
+# Saradomin brew(4)
+23575,23577|23579|23581
+# Stamina potion(4)
+23583,23585|23587|23589
+# Divine super combat potion(4)
+23685,23688|23691|23694
+# Divine super attack potion(4)
+23697,23700|23703|23706
+# Divine super strength potion(4)
+23709,23712|23715|23718
+# Divine super defence potion(4)
+23721,23724|23727|23730
+# Divine ranging potion(4)
+23733,23736|23739|23742
+# Divine magic potion(4)
+23745,23748|23751|23754
+# Egniol potion (4)
+23885,23884|23883|23882
+# Blighted super restore(4)
+24598,24601|24603|24605
+# Divine battlemage potion(4)
+24623,24626|24629|24632
+# Divine bastion potion(4)
+24635,24638|24641|24644
+# Castlewars brew(4)
+25159,25160|25161|25162
+# Potion of power(4)
+25203,25204|25205|25206
+# Antipoison (-)(4)
+25757,25756|25755|25754
+# Antipoison potion (4)
+25761,25760|25759|25758
+# Antipoison (+)(4)
+25765,25764|25763|25762
+# Combat potion(4)
+26150,26151|26152|26153
+# Ancient brew(4)
+26340,26342|26344|26346
+# Ancient mix(2)
+26350,26353
+# Goblin potion(4)
+26581,26583|26585|26587
+# Menaphite remedy(4)
+27202,27205|27208|27211
+# Nectar (4)
+27315,27317|27319|27321
+# Tears of Elidinis (4)
+27327,27329|27331|27333
+# Liquid adrenaline (2)
+27339,27341
+# Smelling salts (2)
+27343,27345
+# Ambrosia (2)
+27347,27349
+# Forgotten brew(4)
+27629,27632|27635|27638
+# Moonlight potion(4)
+29080,29081|29082|29083
+# Blighted overload (4)
+29631,29634|29637|29640
+# Extended anti-venom+(4)
+29824,29827|29830|29833
+# Prayer regeneration potion(4)
+30125,30128|30131|30134
+# Goading potion(4)
+30137,30140|30143|30146
+# Echo ahrim's hood
+30445,30543|30525|30531|30537|30519
+# Echo ahrim's robetop
+30447,30545|30527|30533|30539|30521
+# Echo ahrim's robeskirt
+30449,30547|30529|30535|30541|30523
+# Echo ahrim's staff
+30568,30574|30571|30572|30573|30570
+# Surge potion(4)
+30875,30878|30881|30884
+# Haemostatic dressing (4)
+31590,31593|31596|31599
+# Super fishing potion(4)
+31602,31605|31608|31611
+# Extreme energy potion(4)
+31614,31617|31620|31623
+# Super hunter potion(4)
+31626,31629|31632|31635
+# Extended stamina potion(4)
+31638,31641|31644|31647
+# Armadyl brew(4)
+31650,31653|31656|31659
+# Putrid sticky potion (4)
+33803,33804|33805|33806
+# Foul chunky potion (4)
+33807,33808|33809|33810
+# Rancid slimy potion (4)
+33811,33812|33813|33814
+# Rank frothy potion (4)
+33815,33816|33817|33818

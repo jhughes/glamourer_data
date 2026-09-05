@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Fetch the OSRS wiki's pets, with the item and NPC ids behind each one.
 
-Reads the pet tables on /w/Pet, then each pet page's {{Infobox NPC}} and {{Infobox Item}}, whose
-versionN/idN parameters are index-aligned. Writes osrs_wiki_pets.json for the pet sheet generator.
+Reads the pet tables on /w/Pet and the metamorphosis table on /w/Metamorphosis, then each pet
+page's {{Infobox NPC}} and {{Infobox Item}}, whose versionN/idN parameters are index-aligned.
+Writes osrs_wiki_pets.json for the pet sheet generator.
 """
 import json
 import re
@@ -16,18 +17,23 @@ API_URL = "https://oldschool.runescape.wiki/api.php"
 SECTION_START = "==List of pets=="
 SECTION_END = "==Pet-free locations=="
 
+# Most metamorphs are versions of their base pet's infoboxes, but some (Fox, Pheasant) are pages of
+# their own that /w/Pet never links, so the metamorphosis table is read as a second source.
+METAMORPH_START = "== List of all pet metamorphoses =="
+METAMORPH_END = "{{Pets}}"
+
 
 def wikitext(page):
     params = {"action": "parse", "page": page, "prop": "wikitext", "format": "json", "redirects": 1}
     data = get(API_URL, params).json()
     if "error" in data:
         print(f"  {page}: {data['error'].get('info', data['error'])}")
-        return None
-    return data["parse"]["wikitext"]["*"]
+        return None, None
+    return data["parse"]["title"], data["parse"]["wikitext"]["*"]
 
 
 def fetch_pet_pages():
-    text = wikitext("Pet")
+    _, text = wikitext("Pet")
 
     # Confine the scan to the pet tables so navboxes can't contribute names; if the headings
     # move, fall back to the whole page loudly.
@@ -38,6 +44,19 @@ def fetch_pet_pages():
         section = text
 
     return sorted({m.group(1).split("#")[0].strip() for m in re.finditer(r"\{\{plinkt\|([^\}\|]+)", section)})
+
+
+def fetch_metamorph_pages():
+    """Every page the metamorphosis table's Pet and Metamorphosis columns link ({{Chatl|...}})."""
+    _, text = wikitext("Metamorphosis")
+
+    try:
+        section = text[text.index(METAMORPH_START):text.index(METAMORPH_END)]
+    except ValueError:
+        print(f"WARNING: could not find {METAMORPH_START}..{METAMORPH_END}, scanning whole page")
+        section = text
+
+    return sorted({m.group(1).split("#")[0].strip() for m in re.finditer(r"\{\{[Cc]hatl\|([^\}\|]+)", section)})
 
 
 def infobox(text, kind):
@@ -78,7 +97,7 @@ def ids(value):
 
 
 def fetch_pet(page):
-    text = wikitext(page)
+    title, text = wikitext(page)
     if text is None:
         return None
 
@@ -131,18 +150,19 @@ def fetch_pet(page):
     if not versions:
         print(f"  {page}: no item/npc versions could be aligned")
         return None
-    return {"page": page, "versions": versions}
+    return {"page": title, "versions": versions}
 
 
-pets = []
-pages = fetch_pet_pages()
-print(f"Found {len(pages)} pets on /w/Pet, reading pages...")
+pages = sorted(set(fetch_pet_pages()) | set(fetch_metamorph_pages()))
+print(f"Found {len(pages)} pet pages on /w/Pet and /w/Metamorphosis, reading pages...")
 
+pets = {}
 for page in pages:
     pet = fetch_pet(page)
-    if pet:
-        pets.append(pet)
     time.sleep(0.1)
+    if pet:
+        pets.setdefault(pet["page"], pet)
+pets = list(pets.values())
 
 with open("osrs_wiki_pets.json", "w") as f:
     json.dump({

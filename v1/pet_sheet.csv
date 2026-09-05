@@ -1,6 +1,6 @@
 # This file is generated; do not edit manually.
 # cache: 6de4085 Cache version 2026-09-02-rev240
-# wiki pets fetched: 2026-09-03T08:09:51Z
+# wiki pets fetched: 2026-09-05T07:29:19Z
 item_id,npc_ids,npc_models
 # Cat (Grey and black)
 1561,1619|6662,
@@ -342,6 +342,10 @@ item_id,npc_ids,npc_models
 28250,12155|12159,49195
 # Lil'viathan
 28252,12156|12160,49285|49284
+# Pheasant (pet)
+28669,12547|12549,
+# Fox (pet)
+28670,12548|12550,
 # Scurry
 28801,7219|7616,50146
 # Smol Heredit

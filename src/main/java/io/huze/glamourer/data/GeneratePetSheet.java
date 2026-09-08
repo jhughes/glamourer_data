@@ -17,9 +17,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.cache.definitions.ItemDefinition;
-import net.runelite.cache.definitions.ModelDefinition;
 import net.runelite.cache.definitions.NpcDefinition;
 import net.runelite.cache.definitions.providers.ModelProvider;
 
@@ -28,23 +29,27 @@ public class GeneratePetSheet
 {
 	private final Collection<ItemDefinition> itemDefs;
 	private final Collection<NpcDefinition> npcDefs;
-	private final ModelProvider modelProvider;
+	private final ModelColors modelColors;
 	private final Csv csv;
-	private final Map<Integer, Set<Short>> colorCache = new HashMap<>();
 
 	public GeneratePetSheet(Collection<ItemDefinition> itemDefs, Collection<NpcDefinition> npcDefs, ModelProvider modelProvider, Csv csv)
 	{
 		this.itemDefs = itemDefs;
 		this.npcDefs = npcDefs;
-		this.modelProvider = modelProvider;
+		this.modelColors = new ModelColors(modelProvider);
 		this.csv = csv;
 	}
 
 	public void export(File out, File wikiPetsJson) throws IOException
 	{
 		WikiPetsFile wiki = readPets(wikiPetsJson);
-		List<PetRow> rows = rows(wiki.pets);
-		try (PrintWriter writer = csv.open(out, "wiki pets fetched: " + wiki.fetched_utc))
+		List<WikiPet> pets = new ArrayList<>(wiki.pets);
+		List<WikiPet> dogs = missingDogs(wiki.pets);
+		pets.addAll(dogs);
+
+		List<PetRow> rows = rows(pets);
+		try (PrintWriter writer = csv.open(out, "wiki pets fetched: " + wiki.fetched_utc,
+			"dogs paired from the cache because the wiki lacks them: " + dogs.size()))
 		{
 			writer.println(PetRow.CSV_HEADER);
 			for (PetRow row : rows)
@@ -53,6 +58,36 @@ public class GeneratePetSheet
 			}
 		}
 		log.info("Wrote to " + out.getAbsolutePath());
+	}
+
+	private List<WikiPet> missingDogs(List<WikiPet> wikiPets)
+	{
+		Set<Integer> wikiItems = new HashSet<>();
+		for (WikiPet pet : wikiPets)
+		{
+			for (WikiVersion version : pet.versions)
+			{
+				wikiItems.addAll(version.item_ids);
+			}
+		}
+
+		List<WikiPet> missing = new ArrayList<>();
+		for (WikiPet dog : new DogPets(itemDefs, npcDefs).pets())
+		{
+			List<WikiVersion> versions = new ArrayList<>();
+			for (WikiVersion version : dog.versions)
+			{
+				if (Collections.disjoint(wikiItems, version.item_ids))
+				{
+					versions.add(version);
+				}
+			}
+			if (!versions.isEmpty())
+			{
+				missing.add(new WikiPet(dog.page, versions));
+			}
+		}
+		return missing;
 	}
 
 	private List<PetRow> rows(List<WikiPet> pets)
@@ -87,7 +122,7 @@ public class GeneratePetSheet
 						log.warn("Pet \"{}\": wiki item {} is not in the cache", pet.page, itemId);
 						continue;
 					}
-					rows.add(new PetRow(itemId, ids(npcs), extraModels(item, npcs),
+					rows.add(new PetRow(itemId, ids(npcs), modelColors.extraModels(item, npcs),
 						comment(pet, version)));
 				}
 			}
@@ -95,7 +130,7 @@ public class GeneratePetSheet
 
 		rows.sort(Comparator.comparingInt(PetRow::getItemId));
 		warnSharedNpcs(rows);
-		log.info("Paired {} pet items from {} wiki pets", rows.size(), pets.size());
+		log.info("Paired {} pet items from {} pets", rows.size(), pets.size());
 		return rows;
 	}
 
@@ -144,69 +179,11 @@ public class GeneratePetSheet
 		return ids;
 	}
 
-	private List<Integer> extraModels(ItemDefinition item, List<NpcDefinition> npcs)
-	{
-		Set<Short> seen = new HashSet<>(modelColors(item.inventoryModel));
-		List<Integer> extra = new ArrayList<>();
-
-		for (NpcDefinition npc : npcs)
-		{
-			if (npc.models == null)
-			{
-				continue;
-			}
-			for (int modelId : npc.models)
-			{
-				if (extra.contains(modelId))
-				{
-					continue;
-				}
-				Set<Short> colors = modelColors(modelId);
-				if (!seen.containsAll(colors))
-				{
-					seen.addAll(colors);
-					extra.add(modelId);
-				}
-			}
-		}
-		return extra;
-	}
-
 	private String comment(WikiPet pet, WikiVersion version)
 	{
 		return version.name == null || version.name.isBlank()
 			? pet.page
 			: pet.page + " (" + version.name + ")";
-	}
-
-	/// Cached: a pet's follower and house copies share models.
-	private Set<Short> modelColors(int modelId)
-	{
-		if (modelId <= 0)
-		{
-			return Collections.emptySet();
-		}
-		return colorCache.computeIfAbsent(modelId, id -> {
-			try
-			{
-				ModelDefinition model = modelProvider.provide(id);
-				if (model == null || model.faceColors == null)
-				{
-					return Collections.emptySet();
-				}
-				Set<Short> colors = new HashSet<>();
-				for (short color : model.faceColors)
-				{
-					colors.add(color);
-				}
-				return colors;
-			}
-			catch (IOException e)
-			{
-				log.debug("Failed to load model {}: {}", id, e.getMessage());
-				return Collections.emptySet();
-			}
-		});
 	}
 
 	private WikiPetsFile readPets(File wikiPetsJson) throws IOException
@@ -223,13 +200,17 @@ public class GeneratePetSheet
 		List<WikiPet> pets;
 	}
 
-	private static class WikiPet
+	@AllArgsConstructor
+	@NoArgsConstructor
+	static class WikiPet
 	{
 		String page;
 		List<WikiVersion> versions = Collections.emptyList();
 	}
 
-	private static class WikiVersion
+	@AllArgsConstructor
+	@NoArgsConstructor
+	static class WikiVersion
 	{
 		String name;
 		List<Integer> item_ids = Collections.emptyList();

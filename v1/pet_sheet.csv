@@ -1,6 +1,7 @@
 # This file is generated; do not edit manually.
-# cache: 6de4085 Cache version 2026-09-02-rev240
-# wiki pets fetched: 2026-09-05T07:29:19Z
+# cache: 8e40129 Cache version 2026-09-08-rev240
+# wiki pets fetched: 2026-09-08T17:28:30Z
+# dogs paired from the cache because the wiki lacks them: 24
 item_id,npc_ids,npc_models
 # Cat (Grey and black)
 1561,1619|6662,
@@ -420,3 +421,147 @@ item_id,npc_ids,npc_models
 34040,16316|16333,61849
 # Aggy
 34042,16317|16334,61867
+# Labrador (1)
+34431,16361|16540,57145
+# Labrador (2)
+34433,16362|16541,57147
+# Labrador (3)
+34435,16363|16542,57142
+# Chihuahua (1)
+34437,16364|16543,61972
+# Chihuahua (2)
+34439,16365|16544,61974
+# Chihuahua (3)
+34441,16366|16545,61973
+# Border collie (1)
+34443,16367|16546,61976
+# Border collie (2)
+34445,16368|16547,61977
+# Border collie (3)
+34447,16369|16548,61975
+# Corgi (1)
+34449,16370|16549,55847
+# Corgi (2)
+34451,16371|16550,61978
+# Corgi (3)
+34453,16372|16551,55850
+# Greyhound (1)
+34455,16373|16552,
+# Greyhound (2)
+34457,16374|16553,
+# Greyhound (3)
+34459,16375|16554,61980
+# Husky (1)
+34461,16376|16555,55849
+# Husky (2)
+34463,16377|16556,61983
+# Husky (3)
+34465,16378|16557,61982
+# Pug (1)
+34467,16379|16558,55851
+# Pug (2)
+34469,16380|16559,61985
+# Pug (3)
+34471,16381|16560,
+# Samoyed (1)
+34473,16382|16561,
+# Samoyed (2)
+34475,16383|16562,61987
+# Samoyed (3)
+34477,16384|16563,
+# Bernese mountain dog (1)
+34479,16385|16564,61989
+# Bernese mountain dog (2)
+34481,16386|16565,55848
+# Bernese mountain dog (3)
+34483,16387|16566,55846
+# Shiba (1)
+34485,16388|16567,
+# Shiba (2)
+34487,16389|16568,
+# Shiba (3)
+34489,16390|16569,
+# Spaniel (1)
+34491,16391|16570,61992
+# Spaniel (2)
+34493,16392|16571,61993
+# Spaniel (3)
+34495,16393|16572,61994
+# Yorkie (1)
+34497,16394|16573,55852
+# Yorkie (2)
+34499,16395|16574,
+# Yorkie (3)
+34501,16396|16575,61995
+# Labrador puppy (1)
+34503,16433,62011
+# Labrador puppy (2)
+34505,16434,62012
+# Labrador puppy (3)
+34507,16435,62013
+# Husky puppy (1)
+34509,16436,62008
+# Husky puppy (2)
+34511,16437,62010
+# Husky puppy (3)
+34513,16438,62009
+# Chihuahua puppy (1)
+34515,16439,61996
+# Chihuahua puppy (2)
+34517,16440,
+# Chihuahua puppy (3)
+34519,16441,61997
+# Border collie puppy (1)
+34521,16442,62000
+# Border collie puppy (2)
+34523,16443,62001
+# Border collie puppy (3)
+34525,16444,61999
+# Corgi puppy (1)
+34527,16445,62002
+# Corgi puppy (2)
+34529,16446,62004
+# Corgi puppy (3)
+34531,16447,62003
+# Greyhound puppy (1)
+34533,16448,
+# Greyhound puppy (2)
+34535,16449,
+# Greyhound puppy (3)
+34537,16450,
+# Pug puppy (1)
+34539,16451,62014
+# Pug puppy (2)
+34541,16452,62016
+# Pug puppy (3)
+34543,16453,
+# Samoyed puppy (1)
+34545,16454,
+# Samoyed puppy (2)
+34547,16455,62018
+# Samoyed puppy (3)
+34549,16456,62019
+# Bernese mountain dog puppy (1)
+34551,16457,62022
+# Bernese mountain dog puppy (2)
+34553,16458,62021
+# Bernese mountain dog puppy (3)
+34555,16459,62020
+# Shiba puppy (1)
+34557,16460,
+# Shiba puppy (2)
+34559,16461,62025
+# Shiba puppy (3)
+34561,16462,62024
+# Spaniel puppy (1)
+34563,16463,
+# Spaniel puppy (2)
+34565,16464,
+# Spaniel puppy (3)
+34567,16465,
+# Yorkie puppy (1)
+34569,16466,62029
+# Yorkie puppy (2)
+34571,16467,
+# Yorkie puppy (3)
+34573,16468,62031

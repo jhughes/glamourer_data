@@ -55,6 +55,7 @@ jobs:
           floor stack_variant_sheet 1300
           floor item_dedupe_sheet 150
           floor pet_sheet 190
+          floor item_render_sheet 15000
 
       # Provenance headers change every run; they alone are not worth a commit.
       - name: Commit and push

@@ -43,6 +43,9 @@ public class GenerateSheets
 			new GenerateNpcSheet(npcs.getNpcs(), csv)
 				.export(new File(outDir, "npc_sheet.csv"));
 
+			new GenerateItemEquipSheet(items.getItems(), csv)
+				.export(new File(outDir, "item_equip_sheet.csv"));
+
 			new GenerateItemRenderSheet(items.getItems(), csv)
 				.export(new File(outDir, "item_render_sheet.csv"));
 		}

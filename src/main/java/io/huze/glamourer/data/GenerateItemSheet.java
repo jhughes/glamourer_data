@@ -374,9 +374,7 @@ public class GenerateItemSheet
 
 	private boolean filterItem(ItemDefinition idef)
 	{
-		return idef.name == null ||
-			idef.name.isBlank() ||
-			idef.name.equalsIgnoreCase("null");
+		return !Items.hasName(idef);
 	}
 
 	private static class WikiFacts

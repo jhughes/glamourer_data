@@ -56,6 +56,7 @@ jobs:
           floor item_dedupe_sheet 150
           floor pet_sheet 190
           floor item_render_sheet 15000
+          floor item_equip_sheet 5500
 
       # Provenance headers change every run; they alone are not worth a commit.
       - name: Commit and push

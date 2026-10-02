@@ -1,8 +1,20 @@
 # This file is generated; do not edit manually.
 # cache: ffb0cb0 Cache version 2026-09-30-rev241
-# wiki pets fetched: 2026-09-30T16:31:14Z
+# wiki pets fetched: 2026-10-02T20:26:09Z
 # dogs paired from the cache because the wiki lacks them: 24
 item_id,npc_ids,npc_models
+# Kitten (Grey and black)
+1555,5591,
+# Kitten (White)
+1556,5592,
+# Kitten (Brown)
+1557,5593,
+# Kitten (Black)
+1558,5594,
+# Kitten (Grey and brown)
+1559,5595,
+# Kitten (Grey and blue)
+1560,5596,
 # Cat (Grey and black)
 1561,1619|6662,
 # Cat (White)
@@ -15,8 +27,44 @@ item_id,npc_ids,npc_models
 1565,1623|6666,
 # Cat (Grey and blue)
 1566,1624|6667,
+# Overgrown cat (Grey and black)
+1567,5598|6676,
+# Overgrown cat (White)
+1568,5599|6677,
+# Overgrown cat (Brown)
+1569,5600|6678,
+# Overgrown cat (Black)
+1570,5601|6679,
+# Overgrown cat (Grey and brown)
+1571,5602|6680,
+# Overgrown cat (Grey and blue)
+1572,5603|6681,
 # Pet rock
 3695,5983|6657,
+# Lazy cat (White)
+6549,1626|6684,
+# Lazy cat (Grey and black)
+6550,1627|6683,
+# Lazy cat (Brown)
+6551,1628|6685,
+# Lazy cat (Black)
+6552,1629|6686,
+# Lazy cat (Grey and brown)
+6553,1630|6687,
+# Lazy cat (Grey and blue)
+6554,1631|6688,
+# Wily cat (White)
+6555,5584|6691,
+# Wily cat (Grey and black)
+6556,5585|6690,
+# Wily cat (Brown)
+6557,5586|6692,
+# Wily cat (Black)
+6558,5587|6693,
+# Wily cat (Grey and brown)
+6559,5588|6694,
+# Wily cat (Grey and blue)
+6560,5589|6695,
 # Fishbowl (pet) (Bluefish)
 6670,6658,
 # Fishbowl (pet) (Greenfish)

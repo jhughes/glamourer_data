@@ -22,6 +22,10 @@ SECTION_END = "==Pet-free locations=="
 METAMORPH_START = "== List of all pet metamorphoses =="
 METAMORPH_END = "{{Pets}}"
 
+# Cat growth stages are pages of their own that neither table links (/w/Pet lists only Cat and
+# Hellcat), so they are named here.
+EXTRA_PAGES = ["Kitten", "Overgrown cat", "Wily cat", "Lazy cat"]
+
 
 def wikitext(page):
     params = {"action": "parse", "page": page, "prop": "wikitext", "format": "json", "redirects": 1}
@@ -153,8 +157,8 @@ def fetch_pet(page):
     return {"page": title, "versions": versions}
 
 
-pages = sorted(set(fetch_pet_pages()) | set(fetch_metamorph_pages()))
-print(f"Found {len(pages)} pet pages on /w/Pet and /w/Metamorphosis, reading pages...")
+pages = sorted(set(fetch_pet_pages()) | set(fetch_metamorph_pages()) | set(EXTRA_PAGES))
+print(f"Found {len(pages)} pet pages on /w/Pet, /w/Metamorphosis and the extra list, reading pages...")
 
 pets = {}
 for page in pages:

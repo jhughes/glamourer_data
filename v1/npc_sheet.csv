@@ -1,5 +1,5 @@
 # This file is generated; do not edit manually.
-# cache: ffb0cb0 Cache version 2026-09-30-rev241
+# cache: eb4f705 Cache version 2026-10-07-rev241
 id,ambient,contrast,render_priority
 0,0,0,1
 1,-30,-150,1
@@ -6805,3 +6805,18 @@ id,ambient,contrast,render_priority
 16532,0,0,1
 16533,0,0,1
 16534,0,0,1
+16576,0,0,1
+16578,0,0,1
+16588,-10,0,0
+16589,-10,0,0
+16590,-10,0,0
+16591,-10,0,0
+16592,-10,0,0
+16593,-10,0,0
+16594,-10,0,0
+16595,-10,0,0
+16596,-10,0,0
+16597,-10,0,0
+16601,0,0,1
+16602,0,0,1
+16618,0,0,1

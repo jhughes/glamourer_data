@@ -1,6 +1,6 @@
 # This file is generated; do not edit manually.
 # cache: eb4f705 Cache version 2026-10-07-rev241
-# wiki items fetched: 2026-10-07T17:32:42Z
+# wiki items fetched: 2026-10-08T10:45:01Z
 id,release_date,removal_date,quest,category,male_model0,male_model1,male_model2,female_model0,female_model1,female_model2
 0,1053993600,2147483647,true,0,-1,-1,-1,-1,-1,-1
 1,1053993600,2147483647,true,0,-1,-1,-1,-1,-1,-1
@@ -16429,4 +16429,5 @@ id,release_date,removal_date,quest,category,male_model0,male_model1,male_model2,
 34635,1791331200,2147483647,false,0,-1,-1,-1,-1,-1,-1
 34637,1791331200,2147483647,false,0,-1,-1,-1,-1,-1,-1
 34641,1791331200,2147483647,false,0,-1,-1,-1,-1,-1,-1
+34643,1791331200,2147483647,false,0,-1,-1,-1,-1,-1,-1
 34644,1791331200,2147483647,false,0,-1,-1,-1,-1,-1,-1

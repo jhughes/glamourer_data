@@ -1,6 +1,6 @@
 # This file is generated; do not edit manually.
 # cache: f8c0df4 Cache version 2026-10-20-rev241
-# wiki pets fetched: 2026-10-20T19:23:44Z
+# wiki pets fetched: 2026-10-26T09:08:57Z
 # dogs paired from the cache because the wiki lacks them: 24
 item_id,npc_ids,npc_models
 # Kitten (Grey and black)
@@ -613,3 +613,19 @@ item_id,npc_ids,npc_models
 34571,16467,
 # Yorkie puppy (3)
 34573,16468,62031
+# Orion (Orion)
+34646,16631|16763,62671
+# Orion (Orion (robed))
+34648,16632|16764,62668|62669
+# Orion (Archie)
+34650,16634|16766,62570|62571
+# Orion (Chubbles)
+34651,16635|16767,
+# Orion (Cole)
+34652,16636|16768,2241
+# Orion (Zeke)
+34653,16637|16769,62634
+# Orion (Mimi)
+34654,16638|16770,62654
+# Orion (Dork -->)
+34655,16639|16771,62586

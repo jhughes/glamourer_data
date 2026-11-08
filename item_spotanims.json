@@ -1,0 +1,7 @@
+// Hand managed. Spotanims an item plays on its wearer.
+{
+  "items": [
+    { "name": "Obligator", "itemId": 34715, "spotAnimIds": [4423, 4425] },
+    { "name": "Obligator (uncharged)", "itemId": 34717, "spotAnimIds": [4424, 4426] }
+  ]
+}

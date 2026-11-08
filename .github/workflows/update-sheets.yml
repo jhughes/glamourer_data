@@ -39,7 +39,7 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/abextm/osrs-cache.git
           CACHEVER="$(git -C osrs-cache log -1 --format='%h %s')"
-          ./gradlew run --args="--cache osrs-cache --cache-version '$CACHEVER' --wiki-items osrs_wiki_items.json --wiki-pets osrs_wiki_pets.json --out v1"
+          ./gradlew run --args="--cache osrs-cache --cache-version '$CACHEVER' --wiki-items osrs_wiki_items.json --wiki-pets osrs_wiki_pets.json --item-spotanims item_spotanims.json --out v1"
           echo "CACHEVER=$CACHEVER" >> "$GITHUB_ENV"
 
       # A wiki outage returning empty results must fail loudly, not publish shrunken sheets.

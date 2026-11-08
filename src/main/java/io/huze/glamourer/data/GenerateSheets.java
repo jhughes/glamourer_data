@@ -18,6 +18,7 @@ public class GenerateSheets
 		File cacheDir = new File(required(options, "--cache"));
 		File wikiItems = new File(required(options, "--wiki-items"));
 		File wikiPets = new File(required(options, "--wiki-pets"));
+		File itemSpotAnims = new File(required(options, "--item-spotanims"));
 		File outDir = new File(required(options, "--out"));
 		Csv csv = new Csv(required(options, "--cache-version"));
 		outDir.mkdirs();
@@ -48,6 +49,9 @@ public class GenerateSheets
 
 			new GenerateItemRenderSheet(items.getItems(), csv)
 				.export(new File(outDir, "item_render_sheet.csv"));
+
+			new GenerateSpotAnimSheet(store, csv)
+				.export(itemSpotAnims, new File(outDir, "item_spotanim_sheet.csv"));
 		}
 	}
 
@@ -76,7 +80,7 @@ public class GenerateSheets
 		String value = options.get(name);
 		if (value == null)
 		{
-			System.err.println("Usage: GenerateSheets --cache <cache dir> --cache-version <description> --wiki-items <osrs_wiki_items.json> --wiki-pets <osrs_wiki_pets.json> --out <output dir>");
+			System.err.println("Usage: GenerateSheets --cache <cache dir> --cache-version <description> --wiki-items <osrs_wiki_items.json> --wiki-pets <osrs_wiki_pets.json> --item-spotanims <item_spotanims.json> --out <output dir>");
 			System.exit(1);
 		}
 		return value;

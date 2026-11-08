@@ -1,0 +1,8 @@
+# This file is generated; do not edit manually.
+# cache: local-2026-11-08
+# source: item_spotanims.json
+item_id,spotanim_id,model_id,anim_id,ambient,contrast,resize_x,resize_y,rotation,recolor_find,recolor_replace,retexture_find,retexture_replace
+34715,4423,62097,15125,15,100,128,128,0,,,,
+34715,4425,62097,15132,15,100,128,128,0,,,,
+34717,4424,62098,15125,15,100,128,128,0,,,,
+34717,4426,62098,15132,15,100,128,128,0,,,,

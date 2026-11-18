@@ -1,5 +1,5 @@
 # This file is generated; do not edit manually.
-# cache: 26daa41 Cache version 2026-11-11-rev242
+# cache: 9611fde Cache version 2026-11-18-rev242
 item_id,male_model0,male_model1,male_model2,female_model0,female_model1,female_model2
 35,501,-1,-1,501,-1,-1
 48,26609,-1,-1,26609,-1,-1
@@ -6125,3 +6125,6 @@ item_id,male_model0,male_model1,male_model2,female_model0,female_model1,female_m
 34772,512,-1,-1,512,-1,-1
 34777,16038,215,-1,13624,391,-1
 34801,4099,-1,-1,4101,-1,-1
+34835,534,-1,-1,39602,-1,-1
+34840,4986,-1,-1,5021,-1,-1
+34842,4986,-1,-1,5021,-1,-1
